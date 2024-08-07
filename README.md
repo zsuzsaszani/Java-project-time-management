@@ -5,7 +5,11 @@
 
  Roadmap:
     Classes with userdata
+
     Algorithm
+
     Saving user data with schedule
+
     UI
+    
     Google Integration    
