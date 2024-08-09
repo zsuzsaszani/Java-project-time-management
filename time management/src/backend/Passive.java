@@ -3,23 +3,15 @@ package backend;
 import java.util.ArrayList;
 
 public class Passive extends Task{
-/*public Boolean sleep;
-public Boolean polisleep;
-public int numberOfSleeps;
-public int lenghtOfSleep;
-public Boolean eating;
-public int numberOfMeals;
-public ArrayList<Integer> startTimeOfMeals; 
-public ArrayList<Integer> endTimeOfMeals; 
-*/
+
 private Boolean sleep;
 private Boolean polisleep;
 private int numberOfSleeps;
 private int lengthOfSleep;
 private Boolean eating;
 private int numberOfMeals;
-private ArrayList<Integer> startTimeOfMeals = new ArrayList<>();
-private ArrayList<Integer> endTimeOfMeals = new ArrayList<>();
+private ArrayList<Timeblock> startTimeOfMeals = new ArrayList<>();
+private ArrayList<Timeblock> endTimeOfMeals = new ArrayList<>();
 
 
 public Passive() {
@@ -74,19 +66,19 @@ public void setNumberOfMeals(int numberOfMeals) {
     this.numberOfMeals = numberOfMeals;
 }
 
-public ArrayList<Integer> getStartTimeOfMeals() {
+public ArrayList<Timeblock> getStartTimeOfMeals() {
     return startTimeOfMeals;
 }
 
-public void setStartTimeOfMeals(ArrayList<Integer> startTimeOfMeals) {
-    this.startTimeOfMeals = startTimeOfMeals;
+public void setStartTimeOfMeals(Timeblock startTime) {
+    this.startTimeOfMeals.add(startTime);
 }
 
-public ArrayList<Integer> getEndTimeOfMeals() {
+public ArrayList<Timeblock> getEndTimeOfMeals() {
     return endTimeOfMeals;
 }
 
-public void setEndTimeOfMeals(ArrayList<Integer> endTimeOfMeals) {
-    this.endTimeOfMeals = endTimeOfMeals;
+public void setEndTimeOfMeals(Timeblock endTime) {
+    this.endTimeOfMeals.add(endTime);
 }
 }

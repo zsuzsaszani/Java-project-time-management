@@ -43,7 +43,7 @@ public class Main {
 		ArrayList<Passive> listPassive=new ArrayList<Passive>();
 		if(polisleep.equals("POLIPHASIC")) {sleep.setPolisleep(true);}
 		else{sleep.setPolisleep(false);}
-		sleep.name="sleep";
+		sleep.setName("sleep");
 		sleep.setSleep(true);
 		
 		if(sleep.getPolisleep()) {
@@ -67,18 +67,45 @@ public class Main {
 		 System.out.println("Let's move on to your eating habits.");
 	        System.out.println("How many times do you eat a day?");
 	        eating.setNumberOfMeals(scan.nextInt());
-	        scan.nextLine();  // Consume newline left-over
+	        scan.nextLine(); 
+	        Timeblock timeblockEating = null;
 
 	        for (int i = 0; i < eating.getNumberOfMeals(); i++) {
 	            System.out.printf("Please describe the time-range in which you have your %d. meal. Please use this format: 1800 2200 (from 6 pm. till 10 pm.)\n", i + 1);
 	            String temporal[] = scan.nextLine().split(" ");
+	            int startHour=Integer.parseInt(temporal[0].substring(0, 1));
+	            int startMin=Integer.parseInt(temporal[0].substring(2, 3));
+	            timeblockEating.setStart(startHour, startMin);
 	            
-	            int startTime = Integer.parseInt(temporal[0]);
-	            int endTime = Integer.parseInt(temporal[1]);
+	            int endHour=Integer.parseInt(temporal[0].substring(0, 1));
+	            int endMin=Integer.parseInt(temporal[0].substring(2, 3));
+	            timeblockEating.setEnd(endHour, endMin);
+	            
 
-	            eating.getStartTimeOfMeals().add(startTime);
-	            eating.getEndTimeOfMeals().add(endTime);
+	            eating.setStartTimeOfMeals(timeblockEating);
+	            eating.setEndTimeOfMeals(timeblockEating);
 	        }
+	        
+	        //reserved time
+	        System.out.println("Please indicate your dedicated times on the table! In this version, with the given format: 0900 1330 (means: from 9 a.m. till 1:30 p.m.). If done with one block, press enter, if done with each, press Q"); //here:numbers, later: visual
+	        
+	        while(!scan.next().toUpperCase().equals("Q")) {
+	        	Timeblock timeblockReserved = null;
+	        	String temporal[] = scan.nextLine().split(" ");
+	            int startHour=Integer.parseInt(temporal[0].substring(0, 1));
+	            int startMin=Integer.parseInt(temporal[0].substring(2, 3));
+	            timeblockReserved.setStart(startHour, startMin);
+	            
+	            int endHour=Integer.parseInt(temporal[0].substring(0, 1));
+	            int endMin=Integer.parseInt(temporal[0].substring(2, 3));
+	            timeblockReserved.setEnd(endHour, endMin);
+	            
+		        System.out.println("Now, please give a name to this activity: ");
+		        timeblockReserved.setName(scan.nextLine());
+		        ReservedTime.setReservedTimes(timeblockReserved);
+	        }
+
+	        
 		
 		
 		
