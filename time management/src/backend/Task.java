@@ -1,25 +1,30 @@
 package backend;
 
-public abstract class Task extends Timeblock {
+import java.util.ArrayList;
+
+public class Task extends Timeblock {
 	public Task() {super();}
 public int times=0;
-public String type="";
-public String daytime="";
+public TYPE type;
+public DAYTIME daytime;
 public int priority;
-public void giving(int times, String type, int priority) {
-	
-	this.times=times;
-	this.type=type;
-	this.priority=priority;
-	
-}
-public void giving(int times) {
-	this.times=times;
-	
-}
-public void giving(String type) {
-	this.type=type;	
-}
-//priority missing
+
+// args concerning sleep
+public boolean sleep;
+public boolean polisleep;
+public int numberOfSleeps;
+public int lengthOfSleep;
+
+
+//args concerning eating
+public int numberOfMeals;
+public ArrayList<Timeblock> startTimeOfMeals = new ArrayList<>();
+public ArrayList<Timeblock> endTimeOfMeals = new ArrayList<>();
+
+
+
+
+
+
 
 }
