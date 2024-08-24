@@ -1,16 +1,12 @@
 package backend;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-	@SuppressWarnings("null")
 	public static void main(String[] args) {
 
 		//welcome
@@ -219,6 +215,7 @@ public class Main {
 	                              task.getType().name() + " type of activity, preferred daytime: " +
 	                              task.getDaytime().name() + "\n");
 	            }
+	            writer.flush();
 	            writer.close();
 	        } catch (IOException e) {
 	            e.printStackTrace();

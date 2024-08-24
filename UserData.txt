@@ -1,0 +1,2 @@
+a: 2 hours/week, ACTIVE type of activity, preferred daytime: DAWN
+b: 3 hours/week, FUN type of activity, preferred daytime: MORNING
