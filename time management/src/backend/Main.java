@@ -219,19 +219,33 @@ public class Main {
 	        	}
 	        }
 	        
-	       /* //printing tasks to UserData.txt
+	        //printing in English
 	        try {
-	            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Cakow\\eclipse-workspace\\SerializeDemo\\employee.ser");
+	            FileWriter writer = new FileWriter("UserData.txt");
+	            for (Task task : orderedTaskList) {
+	                writer.append(task.getName() + ": " + task.getTimes() + " hours/week, " +
+	                              task.getType().name() + " type of activity, preferred daytime: " +
+	                              task.getDaytime().name() + "\n");
+	            }
+	            writer.flush();
+	            writer.close();
+	            
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	      
+	        
+	        try {
+	            FileOutputStream fileOut = new FileOutputStream("UserData.ser");
 	            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	            out.writeObject(user);
+	            out.writeObject(taskList);
 	            
 	            out.close();
 	            fileOut.close();
 	            System.out.println("Object saved!");
-	         } catch (IOException i) {
-	            i.printStackTrace();
+	         } catch (IOException e) {
+	            e.printStackTrace();
 	         }
-	        */ //needs to be revised
 	        
 	scan.close();
 	}
