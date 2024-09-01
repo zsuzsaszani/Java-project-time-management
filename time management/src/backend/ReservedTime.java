@@ -1,15 +1,19 @@
 package backend;
+
 import java.util.ArrayList;
 
-public class ReservedTime extends Timeblock{
-	public ReservedTime() 
-		{
-			super();
-		}
-	
-	private static ArrayList<Timeblock> ReservedTimes=new ArrayList<>();
-	public static void setReservedTimes(Timeblock activity) 
-		{
-			ReservedTimes.add(activity);
-		}
-}	
+public class ReservedTime extends Timeblock {
+    private static ArrayList<Timeblock> reservedTimes = new ArrayList<>();
+
+    public ReservedTime() {
+        super();
+    }
+
+    public static void addReservedTime(Timeblock activity) {
+        reservedTimes.add(activity);
+    }
+
+    public static ArrayList<Timeblock> getReservedTimes() {
+        return reservedTimes;
+    }
+}

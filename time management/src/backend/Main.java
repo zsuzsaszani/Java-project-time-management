@@ -1,8 +1,11 @@
 package backend;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -77,13 +80,16 @@ public class Main {
 	            int endMin = Integer.parseInt(temporal[1].substring(2, 4));    // Extract end minutes correctly
 
 	            Timeblock eatingTimeblock=new Timeblock();
-	            eatingTimeblock.setTimeblock(startHour, startMin, endHour, endMin);
+	            for(int j=0; j<7; j++) {
+	            	eatingTimeblock.setTimeblock(startHour, startMin, endHour, endMin, j);
+	            }
+	            
 
 	            eating.getStartTimeOfMeals().add(eatingTimeblock);  
 	            eating.getEndTimeOfMeals().add(eatingTimeblock);
 	        }
 	        //reserved time
-	        print("Please indicate your dedicated times on the table! In this version, with the given format: 0900 1330 (means: from 9 a.m. till 1:30 p.m.). If done with one block, press enter, if done with each, press Q"); //here:numbers, later: visual
+	        print("Please indicate your dedicated times on the table! In this version, with the given format: 0900 1330 1(means: from Tuesday 9 a.m. till 1:30 p.m.). If done with one block, press enter, if done with each, press Q"); //here:numbers, later: visual
 	        while (true) {
 	        	print("Timeframe: ");
 	            String input = scan.nextLine().trim();
@@ -107,14 +113,16 @@ public class Main {
 
 	            int endHour = Integer.parseInt(temporal[1].substring(0, 2));
 	            int endMin = Integer.parseInt(temporal[1].substring(2, 4));
+	            
+	            int day=Integer.parseInt(temporal[2]);
 
 	            Timeblock timeblockReserved = new Timeblock();
-	            timeblockReserved.setTimeblock(startHour, startMin, endHour, endMin);
+	            timeblockReserved.setTimeblock(startHour, startMin, endHour, endMin, day);
 
 	            System.out.println("Now, please give a name to this activity: ");
 	            timeblockReserved.setName(scan.nextLine());
 
-	            ReservedTime.setReservedTimes(timeblockReserved);
+	            ReservedTime.addReservedTime(timeblockReserved);
 	        }
 	        
 		
@@ -137,6 +145,10 @@ public class Main {
 	            int times = scan.nextInt();
 	            task.setTimes(times);
 	            scan.nextLine(); // Consume newline
+	            
+	            print("For how long would you like to do this activity at one session?");
+	            task.setLength(scan.nextInt());
+	            scan.nextLine();
 
 	            print("What type of activity do you consider it? Active, passive, or fun? ");
 	            String typeInput = scan.nextLine().toUpperCase();
@@ -207,20 +219,19 @@ public class Main {
 	        	}
 	        }
 	        
-	        //printing tasks to UserData.txt
+	       /* //printing tasks to UserData.txt
 	        try {
-	            FileWriter writer = new FileWriter("UserData.txt");
-	            for (Task task : orderedTaskList) {
-	                writer.append(task.getName() + ": " + task.getTimes() + " hours/week, " +
-	                              task.getType().name() + " type of activity, preferred daytime: " +
-	                              task.getDaytime().name() + "\n");
-	            }
-	            writer.flush();
-	            writer.close();
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        
+	            FileOutputStream fileOut = new FileOutputStream("C:\\Users\\Cakow\\eclipse-workspace\\SerializeDemo\\employee.ser");
+	            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	            out.writeObject(user);
+	            
+	            out.close();
+	            fileOut.close();
+	            System.out.println("Object saved!");
+	         } catch (IOException i) {
+	            i.printStackTrace();
+	         }
+	        */ //needs to be revised
 	        
 	scan.close();
 	}
@@ -228,6 +239,14 @@ public class Main {
 	public static void print(String print)
 	{
 	System.out.println(print);
+	}
+	public static void algorithm(ArrayList<Task> tasklist) {
+		 tasklist.sort(Comparator.comparingInt(Task::getPriority));
+		 Schedule schedule=new Schedule();
+		for(Task task:tasklist) {
+			schedule.canAddTask(task);
+			schedule.scheduleBlock(task);
+		}
 	}
 
 }

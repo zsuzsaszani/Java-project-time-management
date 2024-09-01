@@ -3,11 +3,12 @@ package backend;
 import java.util.ArrayList;
 
 public class Task extends Timeblock {
-    
+
     private int times = 0;
     private TYPE type;
     private DAYTIME daytime;
     private int priority;
+    private int length=0;
 
     // Args concerning sleep
     private boolean sleep = false;
@@ -53,6 +54,12 @@ public class Task extends Timeblock {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+    public int getLength() {
+    	return this.length;
+    }
+    public void setLength(int length) {
+    	this.length=length;
     }
 
     public boolean isSleep() {
